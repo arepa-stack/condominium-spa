@@ -24,6 +24,7 @@ const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose }) => {
   useEffect(() => {
     let timer: number | undefined;
     if (isOpen) {
+      document.body.style.overflow = 'hidden';
       const remaining = getRemainingCooldown();
       setCooldown(remaining);
       if (remaining > 0) {
@@ -33,9 +34,12 @@ const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose }) => {
           if (rem <= 0) clearInterval(timer);
         }, 1000);
       }
+    } else {
+      document.body.style.overflow = '';
     }
     return () => {
       if (timer) clearInterval(timer);
+      document.body.style.overflow = '';
     };
   }, [isOpen]);
 
@@ -96,16 +100,17 @@ const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose }) => {
 
   return (
     <div 
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4"
+      className="fixed inset-0 z-[100] overflow-y-auto bg-black/80 backdrop-blur-md"
       onClick={onClose}
     >
+      <div className="flex min-h-full items-center justify-center p-4">
       <div 
-        className="bg-surface-container-low border border-outline-variant/30 w-full max-w-xl rounded-[2.5rem] shadow-2xl overflow-hidden relative animate-in fade-in zoom-in duration-300"
+        className="bg-surface-container-low border border-outline-variant/30 w-full max-w-xl rounded-[2.5rem] shadow-2xl relative animate-in fade-in zoom-in duration-300 my-4"
         onClick={(e) => e.stopPropagation()}
       >
         <button 
           onClick={onClose}
-          className="absolute top-8 right-8 text-on-surface-variant hover:text-on-surface hover:rotate-90 transition-all duration-300"
+          className="absolute top-8 right-8 text-on-surface-variant hover:text-on-surface hover:rotate-90 transition-all duration-300 z-10"
         >
           <span className="material-symbols-outlined text-3xl">close</span>
         </button>
@@ -252,6 +257,7 @@ const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose }) => {
             </form>
           )}
         </div>
+      </div>
       </div>
     </div>
   );
