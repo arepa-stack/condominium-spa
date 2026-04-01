@@ -1,6 +1,8 @@
-import React from 'react';
+interface HeroSectionProps {
+  onDownloadClick: () => void;
+}
 
-const HeroSection: React.FC = () => {
+const HeroSection: React.FC<HeroSectionProps> = ({ onDownloadClick }) => {
   return (
     <section className="max-w-7xl mx-auto px-8 mb-32 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
       <div className="z-10">
@@ -11,7 +13,10 @@ const HeroSection: React.FC = () => {
           Gestiona pagos, facturas y caja chica sin papeleos. La solución definitiva para administradores y vecinos.
         </p>
         <div className="flex flex-col sm:flex-row gap-6">
-          <button className="bg-primary-container text-on-primary-fixed px-10 py-5 rounded-xl font-extrabold text-lg flex items-center justify-center gap-3 hover:bg-secondary-container hover:shadow-[0_0_20px_#ff6d00] transition-all duration-300 transform hover:-translate-y-1">
+          <button 
+            onClick={onDownloadClick}
+            className="bg-primary-container text-on-primary-fixed px-10 py-5 rounded-xl font-extrabold text-lg flex items-center justify-center gap-3 hover:bg-secondary-container hover:shadow-[0_0_20px_#ff6d00] transition-all duration-300 transform hover:-translate-y-1"
+          >
             <span className="material-symbols-outlined">download</span>
             Descargar APK
           </button>
