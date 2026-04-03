@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 interface FeatureCardProps {
   title: string;
@@ -19,29 +20,68 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   showLearnMore = false,
   largeIcon = false,
 }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
+  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["7.5deg", "-7.5deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-7.5deg", "7.5deg"]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
   return (
-    <div className={`bg-surface-container-high rounded-2xl p-8 relative overflow-hidden group hover:scale-[1.02] transition-transform duration-500 border border-tertiary-container/5 hover:border-tertiary-container/30 ${className}`}>
-      <div className="relative z-10 flex flex-col h-full justify-between">
-        <div>
-          <div className={`mb-6 inline-flex p-4 rounded-2xl bg-surface-container-highest neon-glow-blue w-fit`}>
-            <span className={`material-symbols-outlined ${largeIcon ? 'text-4xl' : 'text-3xl'} ${iconColor}`} style={{ fontVariationSettings: "'FILL' 1" }}>
-              {icon}
-            </span>
+    <div className={className} style={{ perspective: '1000px' }}>
+      <motion.div 
+        ref={ref}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+        className="bg-surface-container-high rounded-2xl p-8 relative overflow-hidden group border border-tertiary-container/5 hover:border-tertiary-container/30 transition-colors h-full w-full"
+      >
+        <div className="relative z-10 flex flex-col h-full justify-between" style={{ transform: "translateZ(40px)" }}>
+          <div>
+            <div className={`mb-6 inline-flex p-4 rounded-2xl bg-surface-container-highest neon-glow-blue w-fit`}>
+              <span className={`material-symbols-outlined ${largeIcon ? 'text-4xl' : 'text-3xl'} ${iconColor}`} style={{ fontVariationSettings: "'FILL' 1" }}>
+                {icon}
+              </span>
+            </div>
+            <h3 className={`${largeIcon ? 'text-2xl' : 'text-xl'} font-black mb-4`}>{title}</h3>
+            <p className="text-on-surface-variant text-sm flex-grow">{description}</p>
           </div>
-          <h3 className={`${largeIcon ? 'text-2xl' : 'text-xl'} font-black mb-4`}>{title}</h3>
-          <p className="text-on-surface-variant text-sm flex-grow">{description}</p>
+          {showLearnMore && (
+            <div className="mt-8 flex items-center gap-2 text-tertiary font-bold text-sm uppercase">
+              Saber Más <span className="material-symbols-outlined text-sm">arrow_forward</span>
+            </div>
+          )}
         </div>
-        {showLearnMore && (
-          <div className="mt-8 flex items-center gap-2 text-tertiary font-bold text-sm uppercase">
-            Saber Más <span className="material-symbols-outlined text-sm">arrow_forward</span>
+        {largeIcon && (
+          <div className="absolute -right-8 -bottom-8 opacity-10 group-hover:opacity-20 transition-opacity" style={{ transform: "translateZ(10px)" }}>
+            <span className="material-symbols-outlined text-[160px]">payments</span>
           </div>
         )}
-      </div>
-      {largeIcon && (
-        <div className="absolute -right-8 -bottom-8 opacity-10 group-hover:opacity-20 transition-opacity">
-          <span className="material-symbols-outlined text-[160px]">payments</span>
-        </div>
-      )}
+      </motion.div>
     </div>
   );
 };
