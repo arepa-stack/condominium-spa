@@ -1,21 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface TopNavBarProps {
   onDownloadClick: () => void;
 }
 
 const TopNavBar: React.FC<TopNavBarProps> = ({ onDownloadClick }) => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handler = () => setScrolled(window.scrollY > 8);
+    window.addEventListener('scroll', handler, { passive: true });
+    return () => window.removeEventListener('scroll', handler);
+  }, []);
+
   return (
-    <nav className="fixed top-0 w-full z-50 bg-[#09151a]/70 backdrop-blur-xl border-b border-[#ffffff]/10 shadow-[0_20px_50px_rgba(0,0,0,0.4)]">
-      <div className="flex justify-between items-center w-full px-8 py-4 max-w-7xl mx-auto">
-        <div className="flex items-center gap-3">
-          <img src="/logo.png" alt="Apto Logo" className="h-10 w-10 rounded-xl shadow-[0_0_15px_rgba(255,109,0,0.3)] object-cover" />
-          <div className="text-2xl font-black tracking-tighter text-[#d7e4ec]">Apto</div>
+    <nav
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        scrolled ? 'glass' : 'bg-transparent'
+      }`}
+    >
+      <div className="flex justify-between items-center w-full px-6 md:px-8 py-3.5 max-w-7xl mx-auto">
+        {/* Brand */}
+        <a href="#" className="flex items-center gap-2.5 group">
+          <div className="relative w-8 h-8 rounded-lg bg-gradient-to-br from-primary-container to-secondary-container flex items-center justify-center">
+            <span className="material-symbols-outlined fill-1 text-white" style={{ fontSize: '18px' }}>apartment</span>
+            <div className="absolute inset-0 rounded-lg ring-1 ring-white/20" />
+          </div>
+          <span className="text-lg font-bold tracking-tight text-on-surface">Apto</span>
+        </a>
+
+        {/* Nav links */}
+        <div className="hidden md:flex items-center gap-1 text-sm font-medium text-on-surface-variant">
+          <a href="#features"     className="px-3 py-2 hover:text-on-surface transition-colors rounded-lg hover:bg-white/[0.04]">Funcionalidades</a>
+          <a href="#how-it-works" className="px-3 py-2 hover:text-on-surface transition-colors rounded-lg hover:bg-white/[0.04]">¿Cómo funciona?</a>
         </div>
-        <button 
+
+        {/* CTA */}
+        <button
           onClick={onDownloadClick}
-          className="hidden md:block bg-[#ff6d00] text-[#341100] px-6 py-2.5 rounded-lg font-bold text-sm uppercase tracking-wider hover:bg-[#fd9000] hover:shadow-[0_0_15px_#ff6d00] transition-all duration-300 scale-95 active:scale-90"
+          className="btn-primary px-4 py-2 rounded-lg font-semibold text-sm flex items-center gap-1.5"
         >
+          <span className="material-symbols-outlined fill-1" style={{ fontSize: '16px' }}>download</span>
           Descargar APK
         </button>
       </div>

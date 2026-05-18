@@ -1,18 +1,47 @@
 import React from 'react';
 
 const Footer: React.FC = () => {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="bg-[#09151a] w-full border-t border-[#ffffff]/5 py-12">
-      <div className="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto gap-6">
-        <div className="flex flex-col items-center md:items-start gap-2">
-          <div className="text-xl font-bold text-[#d7e4ec]">Apto</div>
-          <p className="font-['Plus_Jakarta_Sans'] text-xs text-[#e2bfb0]">© 2024 Apto. All rights reserved.</p>
-        </div>
-        <div className="flex gap-8">
-          <a className="font-['Plus_Jakarta_Sans'] text-xs text-[#e2bfb0] hover:text-[#ff6d00] transition-colors opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
-          <a className="font-['Plus_Jakarta_Sans'] text-xs text-[#e2bfb0] hover:text-[#ff6d00] transition-colors opacity-80 hover:opacity-100" href="#">Terms of Service</a>
-          <a className="font-['Plus_Jakarta_Sans'] text-xs text-[#e2bfb0] hover:text-[#ff6d00] transition-colors opacity-80 hover:opacity-100" href="#">Contact Support</a>
-          <a className="font-['Plus_Jakarta_Sans'] text-xs text-[#e2bfb0] hover:text-[#ff6d00] transition-colors opacity-80 hover:opacity-100" href="#">Security</a>
+    <footer className="border-t border-white/[0.06] bg-background">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 py-12">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+
+          {/* Brand */}
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center gap-2.5">
+              <div className="relative w-8 h-8 rounded-lg bg-gradient-to-br from-primary-container to-secondary-container flex items-center justify-center">
+                <span className="material-symbols-outlined fill-1 text-white" style={{ fontSize: '18px' }}>apartment</span>
+                <div className="absolute inset-0 rounded-lg ring-1 ring-white/20" />
+              </div>
+              <span className="text-lg font-bold tracking-tight text-on-surface">Apto</span>
+            </div>
+            <p className="text-sm text-on-surface-variant max-w-xs leading-relaxed">
+              Gestión condominial moderna, sin papeleos.
+            </p>
+            <p className="text-xs text-on-surface-muted mt-2">
+              © {year} Apto. Todos los derechos reservados.
+            </p>
+          </div>
+
+          {/* Links */}
+          <div className="flex flex-wrap gap-x-7 gap-y-3">
+            {[
+              { label: 'Privacidad', href: '#' },
+              { label: 'Términos',   href: '#' },
+              { label: 'Soporte',    href: '#' },
+              { label: 'Seguridad',  href: '#' },
+            ].map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="text-sm text-on-surface-variant hover:text-on-surface font-medium transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </footer>
