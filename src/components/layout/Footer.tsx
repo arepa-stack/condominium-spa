@@ -15,13 +15,19 @@ const Footer: React.FC = () => {
                 <span className="material-symbols-outlined fill-1 text-white" style={{ fontSize: '18px' }}>apartment</span>
                 <div className="absolute inset-0 rounded-lg ring-1 ring-white/20" />
               </div>
-              <span className="text-lg font-bold tracking-tight text-on-surface">Apto</span>
+              <span className="text-lg font-bold tracking-tight text-on-surface">
+                Apto
+                <span className="ml-1.5 text-on-surface-muted font-medium">by</span>{' '}
+                <span className="bg-gradient-to-r from-primary-container to-secondary-container bg-clip-text text-transparent">
+                  nibs
+                </span>
+              </span>
             </div>
             <p className="text-sm text-on-surface-variant max-w-xs leading-relaxed">
               Gestión condominial moderna, sin papeleos.
             </p>
             <p className="text-xs text-on-surface-muted mt-2">
-              © {year} Apto. Todos los derechos reservados.
+              © {year} Apto by nibs. Todos los derechos reservados.
             </p>
           </div>
 
