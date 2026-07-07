@@ -4,29 +4,29 @@ import { motion } from 'framer-motion';
 const SecurityInfo: React.FC = () => {
   const securityFeatures = [
     {
-      title: 'Cifrado en Tránsito (SSL/TLS)',
-      description: 'Toda comunicación entre la aplicación móvil de Apto, la plataforma web y nuestros servidores backend se realiza de manera segura mediante el protocolo HTTPS. Implementamos TLS 1.3 con algoritmos criptográficos robustos para evitar cualquier tipo de intercepción o escucha de información sensible en redes públicas o Wi-Fi residenciales.',
+      title: 'Cifrado en Tránsito',
+      description: 'Toda comunicación entre la aplicación móvil, la plataforma web y nuestros servidores viaja cifrada de extremo a extremo. Esto evita que la información sensible pueda ser interceptada o leída por terceros en redes públicas o Wi-Fi residenciales.',
       icon: 'lock',
       iconBg: 'bg-[#1E3A8A]/50',
       iconColor: 'text-[#93C5FD]',
     },
     {
-      title: 'Políticas de Base de Datos RLS (Row Level Security)',
-      description: 'Utilizamos Supabase PostgreSQL con políticas de seguridad a nivel de fila (RLS). Esto garantiza a nivel de base de datos que un residente solo pueda ver y modificar sus propios datos y los de su condominio específico. Ningún usuario puede saltarse las capas lógicas del frontend para leer facturas, saldos o información de otros edificios.',
+      title: 'Aislamiento de Datos por Condominio',
+      description: 'Aplicamos controles de acceso a nivel de datos que garantizan que cada residente solo pueda ver y modificar su propia información y la de su condominio. Estas reglas se validan del lado del servidor, de modo que nadie puede eludirlas para leer facturas, saldos o información de otros edificios.',
       icon: 'vpn_key',
       iconBg: 'bg-secondary-fixed/50',
       iconColor: 'text-secondary',
     },
     {
       title: 'Comprobantes de Pago Resguardados',
-      description: 'Los comprobantes digitales que subes (como capturas de transferencias o recibos) se alojan en un espacio de almacenamiento seguro en Supabase Storage (bucket `payment-proofs`). El acceso a las URLs de visualización está estrictamente controlado, permitiendo únicamente a los administradores de tu edificio y a ti mismo la visualización de dichos comprobantes.',
+      description: 'Los comprobantes digitales que subes (como capturas de transferencias o recibos) se guardan en un almacenamiento seguro con acceso restringido. Solo tú y los administradores de tu edificio pueden visualizar esos documentos.',
       icon: 'cloud_done',
       iconBg: 'bg-[#064E3B]/50',
       iconColor: 'text-[#6EE7B7]',
     },
     {
-      title: 'Autenticación mediante Tokens JWT',
-      description: 'El inicio de sesión genera un token web JSON (JWT) firmado de forma criptográfica por Supabase Auth. Este token identifica de forma unívoca a tu usuario y expira de forma automática tras periodos de inactividad, evitando que accesos no autorizados a tu dispositivo celular comprometan de forma permanente la seguridad del condominio.',
+      title: 'Sesiones con Expiración Automática',
+      description: 'El inicio de sesión genera una credencial de sesión firmada que identifica tu cuenta de forma única y caduca automáticamente tras periodos de inactividad. Así, un acceso no autorizado a tu dispositivo no compromete de forma permanente la seguridad de tu cuenta ni del condominio.',
       icon: 'admin_panel_settings',
       iconBg: 'bg-[#3B1F71]/50',
       iconColor: 'text-tertiary',
@@ -43,7 +43,7 @@ const SecurityInfo: React.FC = () => {
         transition={{ duration: 0.4 }}
       >
         <a
-          href="#"
+          href="/"
           className="inline-flex items-center gap-2 text-sm text-on-surface-variant hover:text-on-surface transition-colors mb-10 group"
         >
           <span className="material-symbols-outlined transition-transform group-hover:-translate-x-1" style={{ fontSize: '18px' }}>
@@ -112,9 +112,9 @@ const SecurityInfo: React.FC = () => {
             verified_user
           </span>
           <div>
-            <p className="text-sm font-semibold text-on-surface">Auditoría y Monitoreo del Servidor</p>
+            <p className="text-sm font-semibold text-on-surface">Auditoría y Monitoreo</p>
             <p className="text-xs text-on-surface-muted mt-0.5">
-              Cada solicitud en la API es monitoreada y cuenta con un identificador único (X-Request-ID) registrado con Pino Logger para la trazabilidad completa y detección de anomalías.
+              Cada solicitud se registra con un identificador único que permite trazabilidad completa y detección temprana de anomalías, sin exponer datos personales en los registros.
             </p>
           </div>
         </div>
