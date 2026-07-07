@@ -16,30 +16,52 @@ function App() {
   const [currentView, setCurrentView] = useState<'home' | 'privacy' | 'terms' | 'support' | 'security'>('home');
 
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash;
-      if (hash === '#privacy') {
-        setCurrentView('privacy');
-        window.scrollTo({ top: 0, behavior: 'instant' as any });
-      } else if (hash === '#terms') {
-        setCurrentView('terms');
-        window.scrollTo({ top: 0, behavior: 'instant' as any });
-      } else if (hash === '#support') {
-        setCurrentView('support');
-        window.scrollTo({ top: 0, behavior: 'instant' as any });
-      } else if (hash === '#security') {
-        setCurrentView('security');
-        window.scrollTo({ top: 0, behavior: 'instant' as any });
-      } else {
-        setCurrentView('home');
+    const pathToView = (path: string): typeof currentView => {
+      switch (path) {
+        case '/privacy': return 'privacy';
+        case '/terms': return 'terms';
+        case '/support': return 'support';
+        case '/security': return 'security';
+        default: return 'home';
       }
     };
 
-    // Initial check on load
-    handleHashChange();
+    // Compat: enlaces viejos con hash (#privacy) → ruta limpia (/privacy)
+    const legacyHash: Record<string, string> = {
+      '#privacy': '/privacy', '#terms': '/terms',
+      '#support': '/support', '#security': '/security',
+    };
 
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    const resolve = () => {
+      const mapped = legacyHash[window.location.hash];
+      if (mapped) window.history.replaceState(null, '', mapped);
+      setCurrentView(pathToView(window.location.pathname));
+      window.scrollTo({ top: 0, behavior: 'instant' as any });
+    };
+
+    resolve();
+    window.addEventListener('popstate', resolve);
+
+    // Navegación SPA: interceptar clicks en enlaces internos (href="/...").
+    // Los anchors de scroll (#features, #how-it-works) empiezan con '#' y se ignoran.
+    const onClick = (e: MouseEvent) => {
+      if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+      const anchor = (e.target as HTMLElement).closest('a');
+      const href = anchor?.getAttribute('href');
+      if (!anchor || !href || !href.startsWith('/') || anchor.target === '_blank') return;
+      e.preventDefault();
+      if (window.location.pathname !== href) {
+        window.history.pushState(null, '', href);
+        setCurrentView(pathToView(href));
+        window.scrollTo({ top: 0, behavior: 'instant' as any });
+      }
+    };
+    document.addEventListener('click', onClick);
+
+    return () => {
+      window.removeEventListener('popstate', resolve);
+      document.removeEventListener('click', onClick);
+    };
   }, []);
 
   return (

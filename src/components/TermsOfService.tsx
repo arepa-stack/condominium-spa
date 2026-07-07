@@ -38,7 +38,7 @@ const TermsOfService: React.FC = () => {
         transition={{ duration: 0.4 }}
       >
         <a
-          href="#"
+          href="/"
           className="inline-flex items-center gap-2 text-sm text-on-surface-variant hover:text-on-surface transition-colors mb-10 group"
         >
           <span className="material-symbols-outlined transition-transform group-hover:-translate-x-1" style={{ fontSize: '18px' }}>

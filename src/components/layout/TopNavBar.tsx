@@ -21,7 +21,7 @@ const TopNavBar: React.FC<TopNavBarProps> = ({ onDownloadClick }) => {
     >
       <div className="flex justify-between items-center w-full px-6 md:px-8 py-3.5 max-w-7xl mx-auto">
         {/* Brand */}
-        <a href="#" className="flex items-center gap-2.5 group">
+        <a href="/" className="flex items-center gap-2.5 group">
           <div className="relative w-8 h-8 rounded-lg bg-gradient-to-br from-primary-container to-secondary-container flex items-center justify-center">
             <span className="material-symbols-outlined fill-1 text-white" style={{ fontSize: '18px' }}>apartment</span>
             <div className="absolute inset-0 rounded-lg ring-1 ring-white/20" />

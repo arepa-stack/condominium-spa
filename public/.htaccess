@@ -1,0 +1,12 @@
+# SPA fallback: sirve index.html para rutas del cliente (/privacy, /security, etc.)
+# sin esto, cargar una ruta directa devuelve 404.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  # Si el archivo o carpeta existe (assets, favicon...), servirlo tal cual
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+  # Cualquier otra ruta → index.html (routing lo maneja React)
+  RewriteRule ^ index.html [L]
+</IfModule>
