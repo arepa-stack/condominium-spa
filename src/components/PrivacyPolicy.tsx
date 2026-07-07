@@ -118,7 +118,7 @@ const PrivacyPolicy: React.FC = () => {
               </p>
               <div className="flex items-center gap-3 text-sm text-on-surface bg-white/[0.02] border border-white/[0.06] rounded-xl p-3 w-fit">
                 <span className="material-symbols-outlined text-primary-container">mail</span>
-                <span>Contacto de Privacidad: <a href="mailto:soporte@nibs.app" className="underline hover:text-secondary-container transition-colors">soporte@nibs.app</a></span>
+                <span>Contacto de Privacidad: <a href="mailto:adminnibstech@gmail.com" className="underline hover:text-secondary-container transition-colors">adminnibstech@gmail.com</a></span>
               </div>
             </div>
           </section>
@@ -281,7 +281,7 @@ const PrivacyPolicy: React.FC = () => {
                 </div>
                 <div className="bg-black/30 border border-white/[0.04] p-4 rounded-xl space-y-1.5">
                   <p className="font-bold text-on-surface">Opción B: Solicitud por Correo Electrónico</p>
-                  <p>Envíe una solicitud por correo a <a href="mailto:soporte@nibs.app" className="underline font-semibold text-on-surface">soporte@nibs.app</a> indicando su nombre de usuario registrado, correo electrónico y apartamento. Procesaremos su solicitud en un plazo máximo de 72 horas hábiles.</p>
+                  <p>Envíe una solicitud por correo a <a href="mailto:adminnibstech@gmail.com" className="underline font-semibold text-on-surface">adminnibstech@gmail.com</a> indicando su nombre de usuario registrado, correo electrónico y apartamento. Procesaremos su solicitud en un plazo máximo de 72 horas hábiles.</p>
                 </div>
               </div>
               <div className="text-[11px] text-on-surface-muted leading-relaxed">
@@ -347,7 +347,7 @@ const PrivacyPolicy: React.FC = () => {
                 <p className="text-xs text-on-surface-muted mt-0.5">Estamos disponibles para responder tus dudas sobre privacidad y eliminación de cuentas.</p>
               </div>
               <a
-                href="mailto:soporte@nibs.app"
+                href="mailto:adminnibstech@gmail.com"
                 className="btn-primary px-4 py-2 rounded-lg font-semibold text-xs shrink-0 flex items-center gap-2 focus:outline-none"
               >
                 <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>mail</span>

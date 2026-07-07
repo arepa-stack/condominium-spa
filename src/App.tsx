@@ -7,15 +7,28 @@ import HowItWorks from './components/home/HowItWorks'
 import CtaBanner from './components/home/CtaBanner'
 import DownloadModal from './components/home/DownloadModal'
 import PrivacyPolicy from './components/PrivacyPolicy'
+import TermsOfService from './components/TermsOfService'
+import Support from './components/Support'
+import SecurityInfo from './components/SecurityInfo'
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentView, setCurrentView] = useState<'home' | 'privacy'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'privacy' | 'terms' | 'support' | 'security'>('home');
 
   useEffect(() => {
     const handleHashChange = () => {
-      if (window.location.hash === '#privacy') {
+      const hash = window.location.hash;
+      if (hash === '#privacy') {
         setCurrentView('privacy');
+        window.scrollTo({ top: 0, behavior: 'instant' as any });
+      } else if (hash === '#terms') {
+        setCurrentView('terms');
+        window.scrollTo({ top: 0, behavior: 'instant' as any });
+      } else if (hash === '#support') {
+        setCurrentView('support');
+        window.scrollTo({ top: 0, behavior: 'instant' as any });
+      } else if (hash === '#security') {
+        setCurrentView('security');
         window.scrollTo({ top: 0, behavior: 'instant' as any });
       } else {
         setCurrentView('home');
@@ -38,9 +51,11 @@ function App() {
         <TopNavBar onDownloadClick={() => setIsModalOpen(true)} />
 
         <main className="pt-20">
-          {currentView === 'privacy' ? (
-            <PrivacyPolicy />
-          ) : (
+          {currentView === 'privacy' && <PrivacyPolicy />}
+          {currentView === 'terms' && <TermsOfService />}
+          {currentView === 'support' && <Support />}
+          {currentView === 'security' && <SecurityInfo />}
+          {currentView === 'home' && (
             <>
               <HeroSection onDownloadClick={() => setIsModalOpen(true)} />
               <FeatureGrid />
