@@ -35,9 +35,9 @@ const Footer: React.FC = () => {
           <div className="flex flex-wrap gap-x-7 gap-y-3">
             {[
               { label: 'Privacidad', href: '#privacy' },
-              { label: 'Términos',   href: '#' },
-              { label: 'Soporte',    href: '#' },
-              { label: 'Seguridad',  href: '#' },
+              { label: 'Términos',   href: '#terms' },
+              { label: 'Soporte',    href: '#support' },
+              { label: 'Seguridad',  href: '#security' },
             ].map((link) => (
               <a
                 key={link.label}
