@@ -274,15 +274,9 @@ const PrivacyPolicy: React.FC = () => {
                 <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>delete_forever</span>
                 <span>¿Cómo solicitar la eliminación de mi cuenta y mis datos?</span>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                <div className="bg-black/30 border border-white/[0.04] p-4 rounded-xl space-y-1.5">
-                  <p className="font-bold text-on-surface">Opción A: Desde la Aplicación Móvil</p>
-                  <p>Ingrese al módulo de **Mi Perfil** &gt; **Configuración de Cuenta** y presione el botón **"Eliminar Cuenta"**. El sistema solicitará confirmación y procesará la baja automáticamente en nuestros sistemas.</p>
-                </div>
-                <div className="bg-black/30 border border-white/[0.04] p-4 rounded-xl space-y-1.5">
-                  <p className="font-bold text-on-surface">Opción B: Solicitud por Correo Electrónico</p>
-                  <p>Envíe una solicitud por correo a <a href="mailto:adminnibstech@gmail.com" className="underline font-semibold text-on-surface">adminnibstech@gmail.com</a> indicando su nombre de usuario registrado, correo electrónico y apartamento. Procesaremos su solicitud en un plazo máximo de 72 horas hábiles.</p>
-                </div>
+              <div className="bg-black/30 border border-white/[0.04] p-4 rounded-xl space-y-1.5 text-xs">
+                <p className="font-bold text-on-surface">Solicitud por Correo Electrónico</p>
+                <p>Envíe una solicitud a <a href="mailto:adminnibstech@gmail.com" className="underline font-semibold text-on-surface">adminnibstech@gmail.com</a> indicando su nombre de usuario registrado, correo electrónico y apartamento. Procesaremos su solicitud en un plazo máximo de 72 horas hábiles y le confirmaremos por correo una vez completada.</p>
               </div>
               <div className="text-[11px] text-on-surface-muted leading-relaxed">
                 <span className="font-bold text-on-surface">Consecuencias de la eliminación:</span> Al procesar su solicitud de eliminación, se borrarán permanentemente sus credenciales de acceso, nombre, teléfono, dirección de correo electrónico y todas las imágenes de perfil o comprobantes que haya cargado. Los registros contables de pagos realizados por su unidad se mantendrán registrados pero desvinculados de su identidad personal (anonimizados) para no alterar las auditorías del edificio.

@@ -38,6 +38,7 @@ const Footer: React.FC = () => {
               { label: 'Términos',   href: '/terms' },
               { label: 'Soporte',    href: '/support' },
               { label: 'Seguridad',  href: '/security' },
+              { label: 'Eliminar cuenta', href: '/account-deletion' },
             ].map((link) => (
               <a
                 key={link.label}
