@@ -10,10 +10,11 @@ import PrivacyPolicy from './components/PrivacyPolicy'
 import TermsOfService from './components/TermsOfService'
 import Support from './components/Support'
 import SecurityInfo from './components/SecurityInfo'
+import AccountDeletion from './components/AccountDeletion'
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentView, setCurrentView] = useState<'home' | 'privacy' | 'terms' | 'support' | 'security'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'privacy' | 'terms' | 'support' | 'security' | 'account-deletion'>('home');
 
   useEffect(() => {
     const pathToView = (path: string): typeof currentView => {
@@ -22,6 +23,7 @@ function App() {
         case '/terms': return 'terms';
         case '/support': return 'support';
         case '/security': return 'security';
+        case '/account-deletion': return 'account-deletion';
         default: return 'home';
       }
     };
@@ -77,6 +79,7 @@ function App() {
           {currentView === 'terms' && <TermsOfService />}
           {currentView === 'support' && <Support />}
           {currentView === 'security' && <SecurityInfo />}
+          {currentView === 'account-deletion' && <AccountDeletion />}
           {currentView === 'home' && (
             <>
               <HeroSection onDownloadClick={() => setIsModalOpen(true)} />
